@@ -1,0 +1,43 @@
+DISCLAIMER----This routine and info wasn´t created for me!. It´s available in https://www.ng.bluemix.net/docs/#starters/nodejs/index.html#deploynodejsapp
+
+IBM® Bluemix™ provides a SDK for Node.js starter application that you can use as a template. You can add your code to the starter application, and then push the changes back to Bluemix.
+About the Node.js starter application
+
+You can use the Node.js starter application to develop Node.js applications. The IBM SDK for Node.js runtime environment is the container for Node.js applications.
+
+The Node.js starter application demonstrates how to develop and deploy a Node.js application for Bluemix.
+Usage
+Use the following steps to start using the Node.js starter application from the Bluemix user interface:
+
+    Create a Node.js starter application and download the starter code.
+        Click Create App to deploy a Node.js starter application.
+        Provide the App name and Host in the prompt.
+        After the application deploys, click the settings icon and click View Quick Start.
+        Download the starter application package.
+    Ensure that the cf command line tool is installed. This tool is a command line interface for application deployment and management on Bluemix. If you have not installed the cf command line tool, see Installing the cf tool.
+    Log in to the Bluemix environment.
+
+    $ cf login -a https://api.ng.bluemix.net -o <your org name> -s <your space name> API endpoint: https://api.ng.bluemix.net Warning: Insecure http API endpoint detected: secure https API endpoints are recommended Username> <your user ID> Password>******* Authenticating... OK Targeted org <your org name> Targeted space dev API endpoint: https://api.ng.bluemix.net (API version: 2.0.0) User: <your user ID> Org: <your org name> Space: <your space name>
+
+    Add your code to the starter application, and then deploy the application again. You can use the readme file that is in the starter application package to see a description of each file that is in the package.
+
+    Deploy your modified starter application to Bluemix by entering the cf push command. For example:
+
+    $ cf push <yourappname> -p pathtoApp -m 512M
+
+    Access your application. After your application is deployed to Bluemix, enter the URL of the application in a browser to see the application running.
+
+    http://<yourappname>.mybluemix.net
+
+    Optional: Bind services to your application. You can bind the services that are available in Bluemix to your application according to your requirements.
+
+Deploying a Node.js application to Bluemix
+
+You can deploy your Node.js application by using the IBM Node.js buildpack. The IBM Node.js buildpack stages your Node.js application to run in IBM Bluemix.
+
+The buildpack reads the runtime and dependencies information that is defined in the package.json file of a Node.js application. The buildpack also packages the runtime and dependencies of your Node.js application into a droplet that can be deployed to the cloud.
+Use the cf buildpacks command to check the status of the Node.js buildpacks that are provided by Bluemix.
+
+$ cf buildpacks Getting buildpacks... buildpack position enabled locked filename ... nodejs_buildpack 8 true false buildpack_nodejs_v8-177-g2b0a5cf.zip sdk-for-nodejs 2 true false buildpack_sdk-for-nodejs_v1-20140613-1045.zip
+
+sdk-for-nodejs is the default buildpack that is used for Node.js applications in Bluemix, and it is created by IBM. nodejs_buildpack is the external buildpack that is provided by the Cloud Foundry community. The sdk-for-nodejs takes precedence over the nodejs_buildpack in Bluemix. If you want to use the nodejs_buildpack with your application instead of the sdk-for-nodejs buildpack, you must specify your buildpack by using the -b option with the cf push command.
